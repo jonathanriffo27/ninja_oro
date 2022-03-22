@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block main %}
+	<br>
+	<div class="container p-5">
+		<h3>Palabra Random</h3>
+		<br>
+		<div class="row">
+			<div class="col-6 offset-3 p-4 border ">
+				<h1>{{palabra}}</h1>
+			</div>
+		</div>
+		<br>
+		<form action="/random/">
+			<input type="hidden" name="palabra">
+			<button class="btn btn-primary">Generar</button>
+		</form>
+	</div>
+{% endblock %}	
