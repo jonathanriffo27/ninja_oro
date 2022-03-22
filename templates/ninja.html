@@ -7,7 +7,7 @@
 			</div>
 			<div class="col-2">
 				<div class="container border">
-					<h5>0</h5>
+					<h5>{{suma}}</h5>
 				</div>
 			</div>
 		</div>
@@ -16,41 +16,45 @@
 			<div class="col-3 p-4 border ">
 				<h3>Granja</h3>
 				<p>(Gana entre 10 y 20 de oro)</p>
-				<form action="/post/process_money" method="post">
-					<input type="hidden" name="granja">
+				<form action="/gold/process_money" method="post">
+					<input type="hidden" name="min" value="10">
+					<input type="hidden" name="max" value="20">
 					<button class="btn btn-primary">Encontra oro!</button>
 				</form>
 			</div>
 			<div class="col-3 p-4 border ">
 				<h3>Cueva</h3>
 				<p>(Gana entre 5 y 10 de oro)</p>
-				<form action="/post/process_money" method="post">
-					<input type="hidden" name="granja">
+				<form action="/gold/process_money" method="post">
+					<input type="hidden" name="min" value="5">
+					<input type="hidden" name="max" value="10">
 					<button class="btn btn-primary">Encontra oro!</button>
 				</form>
 			</div>
 			<div class="col-3 p-4 border ">
 				<h3>Casa</h3>
 				<p>(Gana entre 2 y 5 de oro)</p>
-				<form action="/post/process_money" method="post">
-					<input type="hidden" name="granja">
+				<form action="/gold/process_money" method="post">
+					<input type="hidden" name="min" value="2">
+					<input type="hidden" name="max" value="5">
 					<button class="btn btn-primary">Encontra oro!</button>
 				</form>
 			</div>
 			<div class="col-3 p-4 border ">
 				<h3>Casino</h3>
 				<p>(Apuesta hasta 50 de oro)</p>
-				<form action="/post/process_money" method="post">
-					<input type="hidden" name="granja">
-					<button class="btn btn-primary">Encontra oro!</button>
+				<form action="/gold/process_money" method="post">
+					<input type="hidden" name="min" value="-50">
+					<input type="hidden" name="max" value="50">
+					<button class="btn btn-primary">Apuesta oro!</button>
 				</form>
 			</div>
 		</div>
 		<br>
 		<h5>Actividades:</h5>	
 		<div class="container border">
-			<p></p>
-			<p></p>
+			<p>Gano {{oro}} de oro </p>
+			<p>{{suma}}</p>
 		</div>
 	</div>
 {% endblock %}	

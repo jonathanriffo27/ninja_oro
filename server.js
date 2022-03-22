@@ -2,6 +2,7 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const session = require('express-session')
 const crypto = require('crypto')
+const {azar, resultado} = require('./db.js')
 
 const app = express()
 
@@ -40,18 +41,21 @@ app.get('/random/reset', (req, res) => {
   res.redirect('/random')
 })
 app.get('/gold', (req, res) => {
-  if (!req.session.palabras) {
-    req.session.palabras = []
+  if (!req.session.oro) {
+    req.session.oro = []
   }
-  const palabra = crypto.randomBytes(7).toString('hex')
-  res.render('ninja.html',{palabra});
+  const oro = req.session.oro
+  let suma = 0;
+  for(i=0; i<oro.length; i++){
+    suma += oro[i]
+  }
+  // console.log(oro)
+  res.render('ninja.html',{suma, oro});
 })
-app.post('/gold/precess_money', (req, res) => {
-  if (!req.session.palabras) {
-    req.session.palabras = []
-  }
-  const palabra = crypto.randomBytes(7).toString('hex')
-  res.render('ninja.html',{palabra});
+app.post('/gold/process_money', async (req, res) => {
+  const resultado = await azar(parseInt(req.body.min), parseInt(req.body.max))
+  req.session.oro.push(resultado)
+  res.redirect('/gold')
 })
 
 
