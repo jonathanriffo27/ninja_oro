@@ -1,0 +1,10 @@
+{% macro lugares(lugar, num) %}
+  <div class="col-3 p-4 border ">
+        <h3>{{lugar}}</h3>
+        <p>(Gana entre {{num}} de oro)</p>
+        <form action="/gold/process_money" method="post">
+          <input type="hidden" name="lugar" value="{{lugar}}">
+          <button class="btn btn-primary">Encontra oro!</button>
+        </form>
+      </div>
+{% endmacro %}

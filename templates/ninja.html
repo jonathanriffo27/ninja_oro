@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from 'macros.html' import lugares %}
 {% block main %}
 	<div class="container p-5">
 		<div class="row">
@@ -13,7 +14,11 @@
 		</div>
 		<br>
 		<div class="row text-center">
-			<div class="col-3 p-4 border ">
+			{{lugares('Granja','10 y 20')}}
+			{{lugares('Cueva','5 y 10')}}
+			{{lugares('Casa','2 y 5')}}
+			{{lugares('Casino','-50 y 50')}}
+			<!-- <div class="col-3 p-4 border ">
 				<h3>Granja</h3>
 				<p>(Gana entre 10 y 20 de oro)</p>
 				<form action="/gold/process_money" method="post">
@@ -44,7 +49,7 @@
 					<input type="hidden" name="lugar" value="casino">
 					<button class="btn btn-primary">Apuesta oro!</button>
 				</form>
-			</div>
+			</div> -->
 		</div>
 		<br>
 		<h5>Actividades:</h5>	
