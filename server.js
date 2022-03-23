@@ -54,13 +54,13 @@ app.get('/gold', (req, res) => {
 })
 app.post('/gold/process_money', async (req, res) => {
   let resultado = 0
-  if(req.body.lugar == "Granja"){
+  if(req.query.lugar == "Granja"){
      resultado = await azar(10, 20)
-  }else if(req.body.lugar == "Cueva"){
+  }else if(req.query.lugar == "Cueva"){
     resultado = await azar(5, 10)
-  }else if(req.body.lugar == "Casa"){
+  }else if(req.query.lugar == "Casa"){
     resultado = await azar(2, 5)
-  }else if(req.body.lugar == "Casino"){
+  }else if(req.query.lugar == "Casino"){
     resultado = await azar(-50, 50)
   }
   // 1 Le sumo la nueva canridad de oro a lo que ya tengo
