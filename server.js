@@ -2,6 +2,7 @@ const express = require('express')
 const nunjucks = require('nunjucks')
 const session = require('express-session')
 const crypto = require('crypto')
+const moment = require("moment");
 const {azar, resultado} = require('./db.js')
 
 const app = express()
@@ -41,20 +42,45 @@ app.get('/random/reset', (req, res) => {
   res.redirect('/random')
 })
 app.get('/gold', (req, res) => {
-  if (!req.session.oro) {
-    req.session.oro = []
+  if (!req.session.actividades) {
+    req.session.actividades = []
   }
-  const oro = req.session.oro
-  let suma = 0;
-  for(i=0; i<oro.length; i++){
-    suma += oro[i]
+  if (!req.session.suma) {
+    req.session.suma = 0
   }
-  // console.log(oro)
-  res.render('ninja.html',{suma, oro});
+  
+  // console.log(color)
+  res.render('ninja.html',{actividades: req.session.actividades, suma: req.session.suma });
 })
 app.post('/gold/process_money', async (req, res) => {
-  const resultado = await azar(parseInt(req.body.min), parseInt(req.body.max))
-  req.session.oro.push(resultado)
+  let resultado = 0
+  if(req.body.lugar == "granja"){
+     resultado = await azar(10, 20)
+  }else if(req.body.lugar == "cueva"){
+    resultado = await azar(5, 10)
+  }else if(req.body.lugar == "casa"){
+    resultado = await azar(2, 5)
+  }else if(req.body.lugar == "casino"){
+    resultado = await azar(-50, 50)
+  }
+  // 1 Le sumo la nueva canridad de oro a lo que ya tengo
+  let text = ""
+  let color = ''
+  let fecha = moment().format("MMMM Do YYYY, h:mm:ss a");
+
+  if(resultado >= 0){
+    text = `Ha ganado ${resultado} ${fecha}` 
+    color = "text-success fs-6"
+  }else{
+    text = `Ha perdido ${resultado} ${fecha}` 
+    color = "text-danger fs-6"
+  }
+  req.session.actividades.push({
+    text,
+    color
+  })
+  // 2. Agrego un nuevo texto a las actividades
+  req.session.suma += resultado
   res.redirect('/gold')
 })
 

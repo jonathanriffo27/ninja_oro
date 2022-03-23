@@ -17,8 +17,7 @@
 				<h3>Granja</h3>
 				<p>(Gana entre 10 y 20 de oro)</p>
 				<form action="/gold/process_money" method="post">
-					<input type="hidden" name="min" value="10">
-					<input type="hidden" name="max" value="20">
+					<input type="hidden" name="lugar" value="granja">
 					<button class="btn btn-primary">Encontra oro!</button>
 				</form>
 			</div>
@@ -26,8 +25,7 @@
 				<h3>Cueva</h3>
 				<p>(Gana entre 5 y 10 de oro)</p>
 				<form action="/gold/process_money" method="post">
-					<input type="hidden" name="min" value="5">
-					<input type="hidden" name="max" value="10">
+					<input type="hidden" name="lugar" value="cueva">
 					<button class="btn btn-primary">Encontra oro!</button>
 				</form>
 			</div>
@@ -35,8 +33,7 @@
 				<h3>Casa</h3>
 				<p>(Gana entre 2 y 5 de oro)</p>
 				<form action="/gold/process_money" method="post">
-					<input type="hidden" name="min" value="2">
-					<input type="hidden" name="max" value="5">
+					<input type="hidden" name="lugar" value="casa">
 					<button class="btn btn-primary">Encontra oro!</button>
 				</form>
 			</div>
@@ -44,8 +41,7 @@
 				<h3>Casino</h3>
 				<p>(Apuesta hasta 50 de oro)</p>
 				<form action="/gold/process_money" method="post">
-					<input type="hidden" name="min" value="-50">
-					<input type="hidden" name="max" value="50">
+					<input type="hidden" name="lugar" value="casino">
 					<button class="btn btn-primary">Apuesta oro!</button>
 				</form>
 			</div>
@@ -53,8 +49,9 @@
 		<br>
 		<h5>Actividades:</h5>	
 		<div class="container border">
-			<p>Gano {{oro}} de oro </p>
-			<p>{{suma}}</p>
+			{% for actividad in actividades %} 
+				<p class="{{actividad.color}}">{{actividad.text}}</p>
+	        {% endfor %}
 		</div>
 	</div>
 {% endblock %}	
